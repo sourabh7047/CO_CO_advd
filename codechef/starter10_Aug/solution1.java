@@ -1,9 +1,10 @@
-package lunchtime_aug;
+package starter10_Aug;
+
 
 import java.util.*;
 import java.io.*;
 
-public class solution3 {
+public class solution1 {
     static class FastReader {
         BufferedReader br;
         StringTokenizer st;
@@ -49,58 +50,44 @@ public class solution3 {
             return next().toCharArray()[0];
         }
     }
-
     public static void main(String[] args) {
         FastReader sc = new FastReader();
         int t = sc.nextInt();
-        while (t-- > 0) {
+        while(t-->0){
             int n = sc.nextInt();
-            int max = Integer.MIN_VALUE;
-            int moves =0;
+            int k =sc.nextInt();
+            int count =0;
 
-            int[] arr = new int[n];
-            for (int i = 0; i < n; i++) {
+            int[] arr  = new int[n];
+            for(int i=0;i<n; i++){
                 arr[i] = sc.nextInt();
-                if (arr[i] > max)
-                    max = arr[i];
             }
 
-            if (max != arr[0]) {
-                System.out.println(-1);
-            } else {
-                int[] output = nextG(arr);
-                for(int i=1;i<n; i++){
-                    if(output[i] == -1) moves++;
+            Arrays.sort(arr);
+            
+            int x =0;
+            while(x<k){
+                if( arr[x] < 0){
+                    arr[x] *=-1;
+                    x++;
+                }else {
+                    break;
                 }
-                System.out.println(moves);
             }
 
+            Arrays.sort(arr);
+
+            int y = n-1;
+            while(y>=0){
+                if(arr[y]>0){
+                    count += arr[y];
+                    y--;
+                }else {
+                    break;
+                }
+            }
+
+            System.out.println(count);
         }
-
-    }
-
-    public static int[] nextG(int arr[]) {
-        int n = arr.length;
-        int[] arrl = new int[n];
-        Stack<Integer> stack = new Stack<>();
-        arrl[n-1] = -1;
-        stack.push(arr[n-1]);
-
-        for(int i=n-2;i>=0; i--){
-            while(stack.size()>0 && arr[i]>stack.peek()){
-                stack.pop();
-            }
-
-            if(stack.size() == 0){
-                arrl[i] = -1;
-            } else {
-                arrl[i] = stack.peek();
-            }
-
-            stack.push(arr[i]);
-        }
-
-        return arrl;
-
     }
 }

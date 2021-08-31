@@ -1,9 +1,10 @@
-package lunchtime_aug;
+package starter10_Aug;
+
 
 import java.util.*;
 import java.io.*;
 
-public class solution1 {
+public class solution4 {
     static class FastReader {
         BufferedReader br;
         StringTokenizer st;
@@ -51,37 +52,4 @@ public class solution1 {
     }
 
     public static void main(String[] args) {
-        FastReader sc = new FastReader();
-        int t = sc.nextInt();
-        while (t-- > 0) {
-            int n = sc.nextInt();
-            int k = sc.nextInt();
-
-            int l = 0;
-            int r = 0;
-            int count =0;
-
-            int[] arr = new int[n];
-            int max = Integer.MIN_VALUE;
-
-            for(int i=0;i<n;i++){
-                arr[i] = sc.nextInt();
-                if(arr[i]>max){
-                    max = arr[i];
-                }
-            }
-
-            while(r<n){
-                if(r-l+1 == k){
-                    if(arr[r] == max) count += n-r;
-                    l++;
-                } else {
-                    r++;
-                }
-            }
-
-            System.out.println(count);
-        }
-    }
-
 }
