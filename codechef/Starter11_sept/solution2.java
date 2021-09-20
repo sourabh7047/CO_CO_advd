@@ -1,10 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll          long long
 #define vi          vector<int>
-#define vll         vector<ll>
-#define pll         pair<ll, ll>
+#define vll         vector<long long>
+#define pll         pair<long long, long long>
 #define pii         pair<int, int>
 #define ld          long double
 #define ff          first
@@ -16,9 +15,9 @@ using namespace std;
 #define pb          push_back
 #define endl        '\n'
 
-const ll INF       = 2e18;
-const ll mod       = 1000000007;
-const ll mod2      = 998244353;
+const long long INF       = 2e18;
+const long long mod       = 1000000007;
+const long long mod2      = 998244353;
 
 
 
@@ -36,7 +35,7 @@ signed main(){
     while (tc++ < tt)
     {
 
-        ll n, k;
+        long long n, k;
         cin >> n >> k;
 
         vll arr(n);
@@ -44,36 +43,36 @@ signed main(){
             cin >> arr[i];
         }
 
-        bool all_zero = true;
-        for(auto x: arr){
-            if(x > 0){
-                all_zero = false;
+        bool allZero = true;
+        for(auto z: arr){
+            if(z > 0){
+                allZero = false;
                 break;
             }
         }
 
-        if(all_zero){
-            cout << 0 << endl;
+        if(allZero){
+            cout << 0 << '\n';
             continue;
         }
 
         if(k == 0){
-            ll ans = 0;
-            for(auto x: arr){
-                ans += x;
+            long long sol = 0;
+            for(auto z: arr){
+                sol += z;
             }
-            cout << ans << endl;
+            cout << sol << '\n';
             continue;
         }
 
-        set<ll> position;
-        set<ll, greater<ll>> positionG;
+        set<long long> pos;
+        set<long long, greater<long long>> posG;
         for(int i = 0; i < n; i++){
             if(arr[i] > 0){
-                position.insert(i);
-                positionG.insert(i);
-                position.insert(i+n);
-                positionG.insert(i+n);
+                pos.insert(i);
+                posG.insert(i);
+                pos.insert(i+n);
+                posG.insert(i+n);
             }
         }
 
@@ -81,39 +80,30 @@ signed main(){
 
         for(int i = 0; i < n; i++){
             if(arr[i] == 0){
-                ll ans1 = *position.lower_bound(i);
-                ll ans2 = *positionG.lower_bound(i+n);
-                ll dist = min(abs(ans1 - i), abs(ans2 - (i+n)));
+                long long val1 = *pos.lower_bound(i);
+                long long val2 = *posG.lower_bound(i+n);
+                long long dist = min(abs(val1 - i), abs(val2 - (i+n)));
                 ans_arr[i] -= dist;
             }
         }
 
-        for(auto &x: ans_arr){
-            if(x < 0){
-                x = 0;
+        for(auto &z: ans_arr){
+            if(z < 0){
+                z = 0;
             }
         }
 
 
-        ll sum = 0;
-        for(auto x: arr){
-            sum += x;
+        long long finalSum = 0;
+        for(auto z: arr){
+            finalSum += z;
         }
 
-        for(auto x: ans_arr){
-            sum += 2LL*x;
+        for(auto z: ans_arr){
+            finalSum += 2LL*z;
         }
 
-        cout << sum << endl;
-
-
-
-
-
-
-
-
+        cout << finalSum << '\n';
     }
-
     return 0;
 }
