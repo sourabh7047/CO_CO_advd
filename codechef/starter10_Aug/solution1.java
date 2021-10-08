@@ -1,6 +1,5 @@
 package starter10_Aug;
 
-
 import java.util.*;
 import java.io.*;
 
@@ -49,45 +48,52 @@ public class solution1 {
         public char nextChar() {
             return next().toCharArray()[0];
         }
+
+        static int gcd(int a, int b) {
+            if (a == 0)
+                return b;
+            return gcd(b % a, a);
+        }
     }
+
     public static void main(String[] args) {
         FastReader sc = new FastReader();
         int t = sc.nextInt();
-        while(t-->0){
+        while (t-- > 0) {
             int n = sc.nextInt();
-            int k =sc.nextInt();
-            int count =0;
+            int even = 0;
+            int odd = 0;
+            int count = 0;
 
-            int[] arr  = new int[n];
-            for(int i=0;i<n; i++){
-                arr[i] = sc.nextInt();
-            }
+            long[] arr = new long[n];
 
-            Arrays.sort(arr);
-            
-            int x =0;
-            while(x<k){
-                if( arr[x] < 0){
-                    arr[x] *=-1;
-                    x++;
-                }else {
-                    break;
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextLong();
+                if (arr[i] % 2 == 0) {
+                    even++;
+                } else {
+                    odd++;
                 }
             }
 
-            Arrays.sort(arr);
-
-            int y = n-1;
-            while(y>=0){
-                if(arr[y]>0){
-                    count += arr[y];
-                    y--;
-                }else {
-                    break;
+            if (even == 0) {
+                System.out.println(0);
+            } else if (odd == 0) {
+                Arrays.sort(arr);
+                for (int i = 0; i < n; i++) {
+                    if (arr[i] % 3 == 0) {
+                       long x = arr[i];
+                       while(x%2 ==0){
+                            x=(long)Math.floor(x/2);
+                           count++;
+                       }
+                        break;
+                    }
                 }
+                System.out.println(count);
+            } else {
+                System.out.println(0);
             }
-
-            System.out.println(count);
         }
     }
 }
